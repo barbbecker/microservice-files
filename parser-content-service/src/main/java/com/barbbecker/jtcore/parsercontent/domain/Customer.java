@@ -1,6 +1,6 @@
 package com.barbbecker.jtcore.parsercontent.domain;
 
-public class Customer {
+public class Customer implements DataId {
 
     private int id;
     private String cnpj;
@@ -11,6 +11,7 @@ public class Customer {
 
     }
 
+    @Override
     public int getId() {
         return id;
     }

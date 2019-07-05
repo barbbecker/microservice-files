@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 public class FormattedFilesTest {
 
     @Test
-    public void testFormatStringWithÇ() {
+    public void testFormatStringWithCedilla() {
         String file =
                 " 001ç1234567891234çDiegoç50000 \n" +
                         " 001ç3245678865434çRenatoç40000.99 \n" +

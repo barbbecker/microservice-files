@@ -1,8 +1,11 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
-group 'com.barbbecker.jtcore.temafinal'
+
+mainClassName = 'com.barbbecker.jtcore.parsercontent.ReceiveFiles'
+
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
@@ -11,14 +14,15 @@ repositories {
     mavenCentral()
 }
 
-
 def rabbitVersion = '5.6.0'
-def commonsVersion = '3.8.1'
+def gsonVersion = '2.8.5'
+
 
 dependencies {
     compile([
             "com.rabbitmq:amqp-client:${rabbitVersion}",
-            "org.apache.commons:commons-lang3:${commonsVersion}"
+            "com.google.code.gson:gson:${gsonVersion}"
+
     ])
 
     testCompile group: 'junit', name: 'junit', version: '4.12'

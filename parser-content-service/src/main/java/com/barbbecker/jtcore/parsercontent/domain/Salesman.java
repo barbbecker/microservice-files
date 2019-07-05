@@ -3,7 +3,7 @@ package com.barbbecker.jtcore.parsercontent.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Salesman {
+public class Salesman implements DataId {
 
     private int id;
     private String cpf;

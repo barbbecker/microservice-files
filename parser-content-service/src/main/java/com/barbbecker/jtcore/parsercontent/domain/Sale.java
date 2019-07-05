@@ -2,9 +2,10 @@ package com.barbbecker.jtcore.parsercontent.domain;
 
 import com.barbbecker.jtcore.parsercontent.file.ParserFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Sale {
+public class Sale implements DataId {
 
     private int id;
     private Integer saleId;
@@ -15,6 +16,7 @@ public class Sale {
 
     }
 
+    @Override
     public int getId() {
         return id;
     }

@@ -1,6 +1,7 @@
 package com.barbbecker.jtcore.parsercontent.file;
 
 import com.barbbecker.jtcore.parsercontent.domain.Customer;
+import com.barbbecker.jtcore.parsercontent.domain.DataId;
 import com.barbbecker.jtcore.parsercontent.domain.Sale;
 import com.barbbecker.jtcore.parsercontent.domain.Salesman;
 
@@ -12,16 +13,19 @@ public class GenerateReport {
 
     private List<Customer> customers;
     private List<Sale> sales;
-    private List<Salesman> salesmen;
+    private List<Salesman> salesmans;
     private List<String> result;
 
     public GenerateReport() {
-        customers = new ArrayList<>();
-        sales = new ArrayList<>();
-        salesmen = new ArrayList<>();
+        this.customers = new ArrayList<>();
+        this.sales = new ArrayList<>();
+        this.salesmans = new ArrayList<>();
+        this.result = new ArrayList<>();
     }
 
-    public List<String> dataAnalyzed(List<String> dataObjects) {
+    public List<String> dataAnalyzed(List<DataId> dataObjects) {
+        createDataObjects(dataObjects);
+
         countCustomers();
         countSalesman();
         idMostExpensiveSale();
@@ -30,11 +34,33 @@ public class GenerateReport {
         return Collections.unmodifiableList(result);
     }
 
+    private void createDataObjects(List<DataId> dataObjects) {
+        dataObjects.stream().forEach(obj -> {
+            if (obj.getId() == 1) {
+                salesmans.add((Salesman) obj);
+            } else if (obj.getId() == 2) {
+                customers.add((Customer) obj);
+            } else {
+                sales.add((Sale) obj);
+            }
+        });
+
+        putSalesToOwner();
+    }
+
+    private void putSalesToOwner() {
+        sales.forEach(sale ->
+                salesmans.forEach(salesman -> {
+                    if (salesman.getName().equals(sale.getSalesmanName())) salesman.addSale(sale);
+                })
+        );
+    }
+
     private void worstSalesman() {
         if (!sales.isEmpty()) {
             Double lowerSales = Double.MAX_VALUE;
             String worstSalesman = null;
-            for (Salesman salesman : salesmen) {
+            for (Salesman salesman : salesmans) {
                 if (salesman.getTotalSales() < lowerSales) {
                     lowerSales = salesman.getTotalSales();
                     worstSalesman = salesman.getName();
@@ -63,7 +89,7 @@ public class GenerateReport {
     }
 
     private void countSalesman() {
-        result.add("Quantity of Salesman: " + salesmen.size());
+        result.add("Quantity of Salesman: " + salesmans.size());
     }
 
     private void countCustomers() {

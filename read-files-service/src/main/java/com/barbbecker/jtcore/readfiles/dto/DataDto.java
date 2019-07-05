@@ -1,13 +1,11 @@
-package com.barbbecker.jtcore.readfiles.domain;
+package com.barbbecker.jtcore.readfiles.dto;
 
-import java.io.Serializable;
-
-public class Data implements Serializable {
+public class DataDto {
 
     private String path;
     private String content;
 
-    public Data(String path, String content) {
+    public DataDto(String path, String content) {
         this.path = path;
         this.content = content;
     }

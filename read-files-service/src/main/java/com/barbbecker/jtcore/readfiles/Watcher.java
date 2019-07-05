@@ -1,9 +1,9 @@
 package com.barbbecker.jtcore.readfiles;
 
-import com.barbbecker.jtcore.readfiles.domain.Data;
+import com.barbbecker.jtcore.readfiles.dto.DataDto;
 import com.barbbecker.jtcore.readfiles.file.ReaderFile;
+import com.google.gson.Gson;
 import com.rabbitmq.client.Channel;
-import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -31,12 +31,13 @@ public class Watcher {
                         String contentData = ReaderFile.readStringFile(Paths.get(PATH_IN + pathFile));
 
                         if (pathFile.endsWith(EXTENTION)) {
-                            Data data = new Data(pathFile, contentData);
+                            DataDto data = new DataDto(pathFile, contentData);
 
-                            byte[] dataSerializable = SerializationUtils.serialize(data);
+                            Gson gson = new Gson();
+                            String dataJsonToString = gson.toJson(data);
 
                             try {
-                                channel.basicPublish("", QUEUE_NAME, null, dataSerializable);
+                                channel.basicPublish("", QUEUE_NAME, null, dataJsonToString.getBytes());
 
                             } catch (IOException e) {
                                 e.printStackTrace();

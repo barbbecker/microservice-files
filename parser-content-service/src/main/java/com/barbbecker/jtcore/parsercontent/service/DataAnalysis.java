@@ -1,6 +1,7 @@
 package com.barbbecker.jtcore.parsercontent.service;
 
 import com.barbbecker.jtcore.parsercontent.domain.Customer;
+import com.barbbecker.jtcore.parsercontent.domain.DataId;
 import com.barbbecker.jtcore.parsercontent.domain.Sale;
 import com.barbbecker.jtcore.parsercontent.domain.Salesman;
 import com.barbbecker.jtcore.parsercontent.exception.DataTypeNotFound;
@@ -11,26 +12,26 @@ public class DataAnalysis {
     private final static String CUSTOMER_ID = "02";
     private final static String SALE_ID = "03";
 
-    public String verifyDatas(String[] data) {
+    public DataId verifyDatas(String[] data) {
 
         if (data[0].equals(SALESMAN_ID)) {
-            return String.valueOf(new Salesman.Builder(1)
+            return new Salesman.Builder(1)
                     .cpf(data[1])
                     .name(data[2])
                     .salary(Double.valueOf(data[3]))
-                    .build());
+                    .build();
         } else if (data[0].equals(CUSTOMER_ID)) {
-            return String.valueOf(new Customer.Builder(2)
+            return new Customer.Builder(2)
                     .cnpj(data[1])
                     .name(data[2])
                     .businessArea(data[3])
-                    .build());
+                    .build();
         } else if (data[0].equals(SALE_ID)) {
-            return String.valueOf(new Sale.Builder(3)
+            return new Sale.Builder(3)
                     .saleId(Integer.valueOf(data[1]))
                     .itens(data[2])
                     .salesmanName(data[3])
-                    .build());
+                    .build();
 
         }
 

@@ -14,7 +14,7 @@ public class WriterFile {
 
     public static void prepareFileToReport(List<String> contentData, String filePath) {
         String fileNamePrepared = filePath.replace(EXTENTION, EXTENTION_TO);
-        Path path = Paths.get(PATH_OUT);
+        String path = PATH_OUT;
         try {
             PrintWriter writer = new PrintWriter(path + fileNamePrepared, "UTF-8");
             contentData.forEach(s -> writer.println(s));

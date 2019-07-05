@@ -1,6 +1,9 @@
 plugins {
     id 'java'
+    id 'application'
 }
+
+mainClassName = 'com.barbbecker.jtcore.readfiles.App'
 
 version '1.0-SNAPSHOT'
 
@@ -11,12 +14,14 @@ repositories {
 }
 
 def rabbitVersion = '5.6.0'
-def commonsVersion = '3.8.1'
+def gsonVersion = '2.8.5'
+
 
 dependencies {
     compile([
             "com.rabbitmq:amqp-client:${rabbitVersion}",
-            "org.apache.commons:commons-lang3:${commonsVersion}"
+            "com.google.code.gson:gson:${gsonVersion}"
+
     ])
 
     testCompile group: 'junit', name: 'junit', version: '4.12'

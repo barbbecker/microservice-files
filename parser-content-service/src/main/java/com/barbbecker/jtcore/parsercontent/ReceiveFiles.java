@@ -1,12 +1,13 @@
 package com.barbbecker.jtcore.parsercontent;
 
-import com.barbbecker.jtcore.parsercontent.domain.Data;
+import com.barbbecker.jtcore.parsercontent.domain.DataId;
+import com.barbbecker.jtcore.parsercontent.dto.DataDto;
 import com.barbbecker.jtcore.parsercontent.file.GenerateReport;
 import com.barbbecker.jtcore.parsercontent.file.ParserFile;
 import com.barbbecker.jtcore.parsercontent.file.WriterFile;
 import com.barbbecker.jtcore.parsercontent.service.DataAnalysis;
+import com.google.gson.Gson;
 import com.rabbitmq.client.*;
-import org.apache.commons.lang3.SerializationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,23 +28,28 @@ public class ReceiveFiles {
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
 
-            Data contentData = SerializationUtils.deserialize(delivery.getBody());
+            Gson gson = new Gson();
+            String message = new String(delivery.getBody(), "UTF-8");
 
-            System.out.println(" [x] Received '" + contentData.getContent() + "'");
+            DataDto dataStringToJson = gson.fromJson(message, DataDto.class);
+
+
+            System.out.println(" [x] Received '" + dataStringToJson.getContent() + "'");
 
             DataAnalysis dataAnalysis = new DataAnalysis();
             GenerateReport generateReport = new GenerateReport();
 
-            List<String[]> formatData = ParserFile.parserForDatas(contentData.getContent());
+            List<String[]> formatData = ParserFile.parserForDatas(dataStringToJson.getContent());
 
-            List<String> dataObjects = new ArrayList<>();
+            List<DataId> dataObjects = new ArrayList<>();
             for (String[] data : formatData) {
                 dataObjects.add(dataAnalysis.verifyDatas(data));
             }
 
             List<String> result = generateReport.dataAnalyzed(dataObjects);
 
-            WriterFile.prepareFileToReport(result, contentData.getPath());
+
+            WriterFile.prepareFileToReport(result, dataStringToJson.getPath());
 
         };
         channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> {
