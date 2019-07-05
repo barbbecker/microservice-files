@@ -7,8 +7,7 @@ Este projeto é um sistema de análise de dados.
   - [Introdução](#introdu%C3%A7%C3%A3o)
   - [Principais recursos utilizados](#principais-recursos-utilizados)
   - [Pré-requisitos](#pr%C3%A9-requisitos)
-  - [Instruções com Dockerfile](#instala%C3%A7%C3%A3o)
-  - [Instruções sem Dockerfile](#instala%C3%A7%C3%A3o)
+  - [Instruções](#instala%C3%A7%C3%A3o)
   - [Autora](#autora)
   - [License](#license)
 
@@ -35,7 +34,8 @@ O que foi necessário para rodar o projeto:
 - GIT instalado
 - RabbitMQ instalado
 
-## Instruções com Dockerfile
+
+## Instruções para rodar o microsserviço
 
 Passos necessários para rodar o projeto: 
 
@@ -44,44 +44,6 @@ Passos necessários para rodar o projeto:
   git clone 
   https://github.com/barbbecker/microservice-files.git
 ```
-
-- Acesse o diretório de cada serviço e digite o comando:
-
-```
-    ./gradlew clean build
-```
-
-- Entre na raiz do primeiro serviço pelo terminal, onde o Dockerfile se encontra e digite os comandos:
-
-```
-    docker build -t <usuario>/service1 .
-```
-
-```
-    docker run -it <usuario>/service1
-```
-
-- Entre na raiz do segundo serviço pelo terminal, onde o Dockerfile se encontra e digite o comando:
-
-```
-    docker build -t <usuario>/service2 .
-```
-
-```
-    docker run -it <usuario>/service2
-```
-
-
-- O sistema somente aceita arquivos .dat
-
-- O sistema vai criar uma pasta dentro do diretório padrão %HOMEPATH%/data/ com duas pastas
-
-- Pasta IN -> você irá colocar seus arquivos .dat
-
-- Pasta OUT -> será gerado um relatório com as informações organizadas dos arquivos .dat que você colocou na pasta IN.
-
-
-## Instruções sem Dockerfile
 
 - Entre na raiz do primeiro serviço pelo terminal e execute os comandos:
 
