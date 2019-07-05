@@ -28,6 +28,7 @@ public class ReceiveFiles {
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
 
             Data contentData = SerializationUtils.deserialize(delivery.getBody());
+
             System.out.println(" [x] Received '" + contentData.getContent() + "'");
 
             DataAnalysis dataAnalysis = new DataAnalysis();
@@ -45,6 +46,7 @@ public class ReceiveFiles {
             WriterFile.prepareFileToReport(result, contentData.getPath());
 
         };
-        channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });
+        channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> {
+        });
     }
 }

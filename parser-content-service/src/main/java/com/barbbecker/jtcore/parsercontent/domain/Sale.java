@@ -30,7 +30,7 @@ public class Sale {
     public Double getPriceTotal() {
         Double total = 0.0;
         for (Item item : itens) {
-            total += item.priceTotal();
+            total += item.getPriceTotal();
         }
         return total;
     }

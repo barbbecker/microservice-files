@@ -1,5 +1,6 @@
 package com.barbbecker.jtcore.parsercontent.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Salesman {
@@ -11,7 +12,7 @@ public class Salesman {
     private List<Sale> sales;
 
     private Salesman() {
-
+        sales = new ArrayList<>();
     }
 
     public int getId() {

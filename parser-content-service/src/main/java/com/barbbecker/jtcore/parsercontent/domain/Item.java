@@ -22,7 +22,7 @@ public class Item {
         return price;
     }
 
-    public Double priceTotal() {
+    public Double getPriceTotal() {
         return price * quantity;
     }
 
