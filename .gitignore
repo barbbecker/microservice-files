@@ -8,3 +8,4 @@
 gradlew.bat
 .project 
 settings.gradle
+**/out/*

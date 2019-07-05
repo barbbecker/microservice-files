@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group 'com.barbbecker.jtcore.temafinal'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+def rabbitVersion = '5.6.0'
+def commonsVersion = '3.8.1'
+
+dependencies {
+    compile([
+            "com.rabbitmq:amqp-client:${rabbitVersion}",
+            "org.apache.commons:commons-lang3:${commonsVersion}"
+    ])
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
